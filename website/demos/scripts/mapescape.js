@@ -116,9 +116,13 @@
       },
       removeScrollHelper: function(){
         this.$scrollHelper.addClass(settings.hiddenClass);
+	  if (typeof settings.callback === 'function')
+	      settings.callback(false);
       },
       showScrollHelper: function(){
         this.$scrollHelper.removeClass(settings.hiddenClass);
+	  if (typeof settings.callback === 'function')
+	      settings.callback(true);
       },
 
       touchstartHandler: function(e){
@@ -143,7 +147,8 @@
         scrollText:  null,                // text on scroll indicator - leave blank for none
         threshhold: 0,                    // amount of viewable scroll area below the map
         tabCenter: true,                  // if false don't position the scroll tab with javascript
-        scrollFollow: true                // set to false for static scroll tab
+        scrollFollow: true,               // set to false for static scroll tab
+        callback: undefined               // callback to execute when scroll helper shown or hidden
       };
         
       if (options) { 
